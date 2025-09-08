@@ -17,6 +17,7 @@ Explore my HackTheBox writeups.
 ├── HackTheBox_ EscapeTwo Writeup [AD]
 ├── HackTheBox_ TheFrizz Writeup [AD]
 ├── HackTheBox_ Puppy Writeup [AD]
+├── HackTheBox_ Fluffy Writeup [AD]
 ├── HackTheBox_ LoveTok/
 ├── HackTheBox_ jscalc/
 ├── HackTheBox_ Neonify/
