@@ -14,6 +14,7 @@ Explore my HackTheBox writeups.
 ├── HackTheBox_ Dog Writeup
 ├── HackTheBox_ Code Writeup
 ├── HackTheBox_ Heal Writeup
+├── HackTheBox_ Imagery Writeup
 ├── HackTheBox_ EscapeTwo Writeup [AD]
 ├── HackTheBox_ TheFrizz Writeup [AD]
 ├── HackTheBox_ Puppy Writeup [AD]
